@@ -92,7 +92,7 @@ this.$refs.modal.classList.remove('is-active');
         async datosPHP(){
         var self = this;
         self.loading = true;
-        let response = await axios.post('onesignal/ver.php');
+        let response = await axios.post('notificaciones/onesignal/ver.php');
         if(response.data.length != 0){
                     self.loading = false;
                     console.log(response.data)

@@ -188,7 +188,7 @@ methods:{
         async datosPHP(que){
         var self = this;
         self.loading = true;
-        let response = await axios.post('onesignal/filtros.php',{que:que, formu: this.formulario});
+        let response = await axios.post('notificaciones/onesignal/filtros.php',{que:que, formu: this.formulario});
         if(response.data.length != 0){
                     self.loading = false;
                     return response.data;   

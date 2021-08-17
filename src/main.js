@@ -4,7 +4,7 @@ import axios from 'axios'
 import '@fortawesome/fontawesome-free/css/all.css'
 import '@fortawesome/fontawesome-free/js/all.js'
 import spinner from '@/components/spinner.vue';
-axios.defaults.baseURL = 'http://localhost';//'http://jjsistemas.epizy.com'//'http://localhost';
+axios.defaults.baseURL = 'https://r2d2.roboticamisiones.com/';//'http://jjsistemas.epizy.com'//'http://localhost';
 
 Vue.config.productionTip = false
 Vue.component('spinner', spinner);
