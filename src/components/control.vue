@@ -47,7 +47,7 @@ export default {
     name:'control',
     data(){
     return{
-        activo:'filtros'
+        activo:'todos'
     }
     },
     components:{
