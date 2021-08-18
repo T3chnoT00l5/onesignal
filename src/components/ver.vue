@@ -4,8 +4,10 @@
         <form class="box"  @submit.prevent="enviar">
             <h3 class="has-text-grey">En esta sección puedes ver los usuarios registrados en la plataforma!</h3>
             <input type="text" v-model="search">
-            <div class="box" v-for="user in users" :key="user.id">
-                <div v-on:click="modal(user.id)">{{user.tags}}</div>
+            <div v-for="user in users" :key="user.id">
+                <div class="box m-5" @click="modal(user)">
+                  <div>{{user.tags}}</div>
+                </div>
                 </div>
 
         <div class="field is-grouped is-grouped-centered">
@@ -19,26 +21,57 @@
         </form>
     </div>
 
-
+<div v-if="msgPHP.players.length > 0 && editar >= 0">
 <div class="modal" ref="modal">
-  <div class="modal-background"></div>
+  <div class="modal-background" @click="cerrar"></div>
   <div class="modal-card">
     <header class="modal-card-head">
       <p class="modal-card-title">Modal title</p>
       <button class="delete" @click="cerrar" aria-label="close"></button>
     </header>
     <section class="modal-card-body">
-      Nombre: usuario
-      <br />
-      Dni: 12313
-      <br />
-      municipio: Candelaria
+
+
+
+<div class="column is-8 is-offset-2">
+
+<div class="field is-grouped">
+    <div class="field-label column is-3 column is-3 is-normal mr-0">
+        <label class="label">Dni:</label>
+      </div>
+      <div class="field-body">
+        <input class="input is-pulled-left" type="text" v-model="msgPHP.players[editar].tags.dni">
+      </div>
+  </div>
+
+  <div class="field is-grouped">
+    <div class="field-label column is-3 is-normal mr-0">
+        <label class="label">Trayecto:</label>
+      </div>
+      <div class="field-body">
+        <input class="input is-pulled-left" type="text" v-model="msgPHP.players[editar].tags.trayecto">
+      </div>
+  </div>
+  
+  <div class="field is-grouped">
+    <div class="field-label column is-3 is-normal mr-0">
+        <label class="label">Municipio:</label>
+      </div>
+      <div class="field-body">
+        <input class="input is-pulled-left" type="text" v-model="msgPHP.players[editar].tags.municipio">
+      </div>
+  </div>
+
+</div>
+
+
     </section>
     <footer class="modal-card-foot">
       <button class="button is-success">Save changes</button>
       <button class="button">Cancel</button>
     </footer>
   </div>
+</div>
 </div>
 
   </div>
@@ -52,7 +85,7 @@ export default {
       return{
         msgPHP: {players:[]},
         search:'',
-        //editar: -1,
+        editar: -1,
         loading: false
       }
     },
@@ -80,11 +113,14 @@ methods:{
 },
 modal(quien){
   //obtener el indice de quien edito
-    //let indice = this.msgPHP.players.map(u => u.id).indexOf(this.msgPHP.players[quien].id);
-    //this.editar = indice;
-    this.$refs.modal.classList.add('is-active');
-    console.log(this.$refs.modal)
-console.log(quien)
+  //console.log(quien)
+      let indice = this.msgPHP.players.indexOf(quien);
+      this.editar = indice;
+      this.$nextTick(function () {
+       this.$refs.modal.classList.add('is-active');
+      })
+      
+
 },
 cerrar(){
 this.$refs.modal.classList.remove('is-active');

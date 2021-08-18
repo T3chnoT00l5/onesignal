@@ -3,14 +3,14 @@
           <div class="column is-6 is-offset-3">
         <form class="box" @submit.prevent="enviar">
 
-        <div class="column is-6 px-0">
+        <div class="column is-10 px-0">
         <div class="field is-horizontal">
-            <div class="column is-3 px-0">
+            <div class="column is-2 px-0">
             <div class="field-label is-normal">
                 <label class="label  is-pulled-left">Municipio:</label>
             </div>
             </div>
-            <div class="column is-9 px-0">
+            <div class="column is-10 is-offset-0-desktop is-offset-2-tablet px-0">
             <div class="field-body">
             <div class="field">
                 <div class="control is-expanded">
@@ -31,14 +31,14 @@
         </div>
         </div>
 
-        <div class="column is-6 px-0">
+        <div class="column is-10 px-0">
         <div class="field is-horizontal">
-            <div class="column is-3 px-0">
+            <div class="column is-2 px-0">
             <div class="field-label is-normal">
                 <label class="label is-pulled-left">Trayecto:</label>
             </div>
             </div>
-            <div class="column is-9 px-0">
+            <div class="column is-10 is-offset-0-desktop is-offset-2-tablet px-0">
             <div class="field-body">
             <div class="field">
                 <div class="control is-expanded">
@@ -137,7 +137,6 @@ export default {
 "Puerto Iguazú",
 "Puerto Libertad",
 "Puerto Piray",
-"Puerto Rico",
 "Puerto Rico",
 "Ruiz de Montoya",
 "Salto Encantado",
