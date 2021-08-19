@@ -1,14 +1,61 @@
 <template>
   <div>
-          <div class="column is-6 is-offset-3">
-        <form class="box"  @submit.prevent="enviar">
+        <form class="notification"  @submit.prevent="enviar">
             <h3 class="has-text-grey">En esta sección puedes ver los usuarios registrados en la plataforma!</h3>
-            <input type="text" v-model="search">
-            <div v-for="user in users" :key="user.id">
-                <div class="box m-5" @click="modal(user)">
-                  <div>{{user.tags}}</div>
+            <div class="field has-addons is-justify-content-center">
+              <p class="control">
+                <input class="input" v-model="search" type="text" placeholder="Busca por DNI">
+              </p>
+              <p class="control">
+                <a class="button is-static">
+                <i class="fas fa-search" aria-hidden="true"></i>
+                </a>
+              </p>
+            </div>
+            <div class="columns is-justify-content-space-evenly is-multiline">
+                <div class="column is-narrow" v-for="user in users" :key="user.id">
+                  <div class="box m-5" @click="modal(user)">
+                      <div class="field is-flex is-flex-wrap-wrap-mobile">
+                          <label class="label px-2 py-1 m-0 is-medium">
+                            <span class="icon-text  has-text-grey mt-1 mr-1 is-flex is-flex-wrap-nowrap">
+                              <i class="fas fa-address-card"></i> 
+                              <span>DNI:</span>
+                            </span>
+                            
+                        </label>
+                          <div class="control column p-0">
+                            <div type="text" class="input has-text-weight-bold notification is-info is-light">{{user.tags.dni}}</div> 
+                          </div>
+                        </div>
+
+                      <div class="field is-flex is-flex-wrap-wrap">
+                          <label class="label px-2 py-1 m-0 is-medium">
+                            <span class="icon-text  has-text-grey mt-1 mr-1 is-flex is-flex-wrap-nowrap">
+                              <i class="fas fa-graduation-cap"></i> 
+                              <span>Trayecto:</span>
+                            </span>
+                            
+                        </label>
+                          <div class="control column p-0">
+                            <div type="text" class="input has-text-weight-bold notification is-info is-light">{{user.tags.trayecto}}</div> 
+                          </div>
+                        </div>
+
+                      <div class="field is-flex is-flex-wrap-wrap">
+                          <label class="label px-2 py-1 m-0 is-medium">
+                            <span class="icon-text  has-text-grey mt-1 mr-1 is-flex is-flex-wrap-nowrap">
+                              <i class="fas fa-map-marked-alt"></i> 
+                              <span>Municipio:</span>
+                            </span>
+                            
+                        </label>
+                          <div class="control column p-0">
+                            <div type="text" class="input has-text-weight-bold notification is-info is-light">{{user.tags.municipio}}</div> 
+                          </div>
+                        </div>
+                  </div>
                 </div>
-                </div>
+            </div>
 
         <div class="field is-grouped is-grouped-centered">
   <div class="control" v-if="loading" style="margin-top: -30px;">
@@ -19,14 +66,13 @@
 
 
         </form>
-    </div>
 
 <div v-if="msgPHP.players.length > 0 && editar >= 0">
 <div class="modal" ref="modal">
   <div class="modal-background" @click="cerrar"></div>
   <div class="modal-card">
     <header class="modal-card-head">
-      <p class="modal-card-title">Modal title</p>
+      <p class="modal-card-title">{{msgPHP.players[editar].id}}</p>
       <button class="delete" @click="cerrar" aria-label="close"></button>
     </header>
     <section class="modal-card-body">
