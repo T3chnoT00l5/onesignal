@@ -13,6 +13,7 @@ cd docs
 
 #git init
 #git add .
+git add -u
 git commit -am "deploy"
 #git commit -m 'deploy'
 git push -f origin master
