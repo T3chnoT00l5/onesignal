@@ -108,6 +108,43 @@
       </div>
   </div>
 
+  <div class="field is-grouped">
+    <div class="field-label column is-3 is-normal mr-0">
+        <label class="label">Espacio:</label>
+      </div>
+      <div class="field-body">
+        <input class="input is-pulled-left" type="text" v-model="msgPHP.players[editar].tags.espacio">
+      </div>
+  </div>
+
+  <div class="field is-grouped">
+    <div class="field-label column is-3 is-normal mr-0">
+        <label class="label">Sede:</label>
+      </div>
+      <div class="field-body">
+        <input class="input is-pulled-left" type="text" v-model="msgPHP.players[editar].tags.sede">
+      </div>
+  </div>
+
+  <div class="field is-grouped">
+    <div class="field-label column is-3 is-normal mr-0">
+        <label class="label">Día:</label>
+      </div>
+      <div class="field-body">
+        <input class="input is-pulled-left" type="text" v-model="msgPHP.players[editar].tags.dia">
+      </div>
+  </div>
+
+  <div class="field is-grouped">
+    <div class="field-label column is-3 is-normal mr-0">
+        <label class="label">Horario:</label>
+      </div>
+      <div class="field-body">
+        <input class="input is-pulled-left" type="text" v-model="msgPHP.players[editar].tags.horario">
+      </div>
+  </div>
+
+
 </div>
 
 
