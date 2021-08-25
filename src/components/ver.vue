@@ -112,9 +112,9 @@
 
 
     </section>
-    <footer class="modal-card-foot">
-      <button class="button is-success">Save changes</button>
-      <button class="button">Cancel</button>
+    <footer class="modal-card-foot is-justify-content-flex-end">
+      <button class="button is-success">Guardar</button>
+      <button class="button">Cancelar</button>
     </footer>
   </div>
 </div>
