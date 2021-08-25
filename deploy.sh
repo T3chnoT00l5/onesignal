@@ -6,7 +6,7 @@ set -e
 npm run build
 
 # navigate into the build output directory
-cd docs
+#cd docs
 
 # if you are deploying to a custom domain
 # echo 'www.example.com' > CNAME
@@ -14,8 +14,8 @@ cd docs
 #git init
 #git add .
 git status
-git add -u
-git commit -am "deploy"
+git add .
+git commit -m "deploy"
 #git commit -m 'deploy'
 git push -f origin master
 # if you are deploying to https://<USERNAME>.github.io
