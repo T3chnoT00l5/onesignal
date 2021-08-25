@@ -13,6 +13,7 @@ cd docs
 
 #git init
 #git add .
+git status
 git add -u
 git commit -am "deploy"
 #git commit -m 'deploy'
