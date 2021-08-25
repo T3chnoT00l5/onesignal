@@ -5,7 +5,7 @@
             <h3 class="has-text-grey">En esta sección enviarás un mensaje a todos los dispositivos que tengan instalada la aplicación</h3>
 
         <div class="field">
-  <label class="label  is-pulled-left">Mensaje:</label>
+  <label class="label  is-pulled-left">MensajexX:</label>
   <div class="control">
     <textarea class="textarea has-fixed-size" v-model="formulario.msg" placeholder="Escribe el mensaje que deseas enviar"></textarea>
   </div>
