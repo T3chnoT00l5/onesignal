@@ -86,7 +86,7 @@
         <label class="label">Dni:</label>
       </div>
       <div class="field-body">
-        <input class="input is-pulled-left" type="text" v-model="msgPHP.players[editar].tags.dni">
+        <input class="input is-pulled-left" type="text" v-model="formu.dni">
       </div>
   </div>
 
@@ -95,7 +95,7 @@
         <label class="label">Trayecto:</label>
       </div>
       <div class="field-body">
-        <input class="input is-pulled-left" type="text" v-model="msgPHP.players[editar].tags.trayecto">
+        <input class="input is-pulled-left" type="text" v-model="formu.trayecto">
       </div>
   </div>
   
@@ -104,7 +104,7 @@
         <label class="label">Municipio:</label>
       </div>
       <div class="field-body">
-        <input class="input is-pulled-left" type="text" v-model="msgPHP.players[editar].tags.municipio">
+        <input class="input is-pulled-left" type="text" v-model="formu.municipio">
       </div>
   </div>
 
@@ -113,7 +113,7 @@
         <label class="label">Espacio:</label>
       </div>
       <div class="field-body">
-        <input class="input is-pulled-left" type="text" v-model="msgPHP.players[editar].tags.espacio">
+        <input class="input is-pulled-left" type="text" v-model="formu.espacio">
       </div>
   </div>
 
@@ -122,7 +122,7 @@
         <label class="label">Sede:</label>
       </div>
       <div class="field-body">
-        <input class="input is-pulled-left" type="text" v-model="msgPHP.players[editar].tags.sede">
+        <input class="input is-pulled-left" type="text" v-model="formu.sede">
       </div>
   </div>
 
@@ -131,7 +131,7 @@
         <label class="label">Día:</label>
       </div>
       <div class="field-body">
-        <input class="input is-pulled-left" type="text" v-model="msgPHP.players[editar].tags.dia">
+        <input class="input is-pulled-left" type="text" v-model="formu.dia">
       </div>
   </div>
 
@@ -140,7 +140,7 @@
         <label class="label">Horario:</label>
       </div>
       <div class="field-body">
-        <input class="input is-pulled-left" type="text" v-model="msgPHP.players[editar].tags.horario">
+        <input class="input is-pulled-left" type="text" v-model="formu.horario">
       </div>
   </div>
 
@@ -150,8 +150,8 @@
 
     </section>
     <footer class="modal-card-foot is-justify-content-flex-end">
-      <button class="button is-success">Guardar</button>
-      <button class="button">Cancelar</button>
+      <button class="button is-success" @click="guardar">Guardar</button>
+      <button class="button" @click="cerrar">Cancelar</button>
     </footer>
   </div>
 </div>
@@ -167,6 +167,7 @@ export default {
     data(){
       return{
         msgPHP: {players:[]},
+        formu:{},
         search:'',
         editar: -1,
         loading: false
@@ -191,14 +192,29 @@ export default {
         console.log("llamado");
     },
 methods:{
-    enviar(){
+enviar(){
   this.datosPHP().then((result) =>this.msgPHP = result);
+},
+guardar(){
+this.datosPHP('guardar').then((result) =>{
+//console.log(result)
+if(result.success){
+  console.log("correcto");
+  this.msgPHP.players[this.editar].tags = this.formu;
+
+  }
+}
+);
 },
 modal(quien){
   //obtener el indice de quien edito
   //console.log(quien)
       let indice = this.msgPHP.players.indexOf(quien);
       this.editar = indice;
+      this.formu = {};
+      let temp = Object.assign({},this.msgPHP.players[indice].tags);
+      this.formu = temp;
+      //this.formu.iduser = this.msgPHP.players[indice].id;
       this.$nextTick(function () {
        this.$refs.modal.classList.add('is-active');
       })
@@ -206,12 +222,21 @@ modal(quien){
 
 },
 cerrar(){
+//this.$nextTick(function () {
+let temp = Object.assign({},{});
+this.formu = temp;
 this.$refs.modal.classList.remove('is-active');
+//})
 },
-        async datosPHP(){
+        async datosPHP(que){
         var self = this;
         self.loading = true;
-        let response = await axios.post('ver.php');
+        let response;
+        if(que){        
+          response = await axios.post('editarusuario.php',{userid: this.msgPHP.players[this.editar].id, formu:this.formu});
+        }else{
+          response = await axios.post('ver.php');
+        }
         if(response.data.length != 0){
                     self.loading = false;
                     console.log(response.data)
@@ -224,9 +249,17 @@ this.$refs.modal.classList.remove('is-active');
 },
     computed: {
         users(){
+          
+            //console.log(this.msgPHP.players);
             return this.msgPHP.players.filter((user) => {
-                return (user.tags.dni.includes(this.search));
+              //console.log(user.tags.dni); //si no tiene dni da error por undefined del filtro....
+              if(user.tags.dni){
+                return (user.tags.dni.includes(this.search))
+              }else{
+                return user;
+              }
             });
+            
         }
     }
 }
